@@ -43,7 +43,7 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
             };
             const options = {
                 id: 'hvhide_' + request.data.userId,
-                title: 'Скрыть посты ' + request.data.userName + ' [' + request.data.forumName + ']',
+                title: 'Скрыть посты ' + request.data.userName + ' [' + forumName + ']',
                 contexts: ['selection']
             };
             menuItem = chrome.contextMenus.create(options);

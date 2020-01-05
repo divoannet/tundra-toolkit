@@ -34,7 +34,7 @@ const hideUserPosts = {
             if (post.classList.contains('topicpost')) return;
 
             const id = this.getUserId(post);
-            if (Object.keys(data).includes(id)) {
+            if (id && Object.keys(data).includes(id)) {
                 post.classList.toggle('hvHiddenPost', data[id].hidden);
             }
         })
@@ -64,6 +64,9 @@ const hideUserPosts = {
 
         const post = target.closest('.post');
 
+        const userId = this.getUserId(post);
+        if (!userId) return;
+
         chrome.runtime.sendMessage({
             type: 'updateContextMenu',
             selection: event.target.text,
@@ -71,7 +74,7 @@ const hideUserPosts = {
             hostname: location.hostname,
             data: {
                 userName: event.target.text,
-                userId: this.getUserId(post),
+                userId
             }
         })
     },
@@ -81,9 +84,11 @@ const hideUserPosts = {
                 ? post.querySelector('.pa-author')
                 : post.querySelector('.pl-email');
 
-        if (!profileMenuItem) return '0';
+        if (!profileMenuItem) return null;
 
         const profileLink = profileMenuItem.querySelector('a');
+        if (! profileLink.href || /javascript\:/.test(profileLink.href)) return null;
+
         return profileLink.href.match(/(\d+)$/)[0];
     }
 }
