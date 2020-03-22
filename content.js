@@ -68,7 +68,7 @@ const hideUserPosts = {
                     .offsetWidth;
                 const userName = post.querySelector('.pa-author a').textContent;
 
-                const spoilerContent = `<div style="width:${postHeadingWidth}px;" class="hvHiddenSpoiler">Посты ${userName} скрыты. <button class="button" type="button"><strong>Посмотреть пост</strong></button></div>`;
+                const spoilerContent = `<div style="width:${postHeadingWidth}px;" class="quote-box spoiler-box hvHiddenSpoiler">Посты ${userName} скрыты. <button class="button" type="button"><strong>Посмотреть пост</strong></button></div>`;
 
                 postContainer.insertAdjacentHTML('beforebegin', spoilerContent);
 
