@@ -1,7 +1,7 @@
 {
     "manifest_version": 2,
     "name": "Игнор спасет мир",
-    "version": "1.0",
+    "version": "1.1.0",
     "icons": {
         "128": "./icons/icon_128.png"
     },
