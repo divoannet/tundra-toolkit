@@ -4,7 +4,7 @@ function save_options() {
     chrome.storage.sync.set(
         { hvHU_hideInstead: hideInsteadOfRemoving },
         function() {
-            console.log('hvHU__popup.js  => save_options(): SAVED');
+            chrome.tabs.reload();
         }
     );
 }
