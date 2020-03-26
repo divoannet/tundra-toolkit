@@ -1,3 +1,18 @@
-#pun .topic .post.hvHiddenPost {
+#pun .topic .post.hvRemovedPost {
     display: none !important;
+}
+
+#pun .topic .post.hvHiddenPost .container {
+    display: none;
+}
+
+#pun .topic .post.hvHiddenPost.hvShow .container {
+    display: block;
+}
+
+#pun .topic .post.hvHiddenPost .hvHiddenSpoiler {
+    box-sizing: border-box;
+    padding: 8px 16px;
+    margin: 8px 0;
+    margin-left: auto;
 }
