@@ -1,26 +1,32 @@
 {
-    "manifest_version": 2,
-    "name": "Игнор спасет мир",
-    "version": "1.1.0",
-    "icons": {
-        "128": "./icons/icon_128.png"
-    },
+    "manifest_version": 3,
+    "name": "Tundra Toolkit",
+    "description": "Набор инструментов для форумных ролевых игр на платформе MyBB и Rusff.",
     "permissions": ["activeTab", "storage", "contextMenus"],
-    "background": {
-        "scripts": ["background.js"],
-        "persistent": false
+    "options_page": "options.html",
+    "version": "2.0",
+    "action": {
+        "default_popup": "popup/popup.html",
+        "default_icon": "assets/icon512.png"
     },
     "content_scripts": [
         {
-            "matches": ["*://*/*"],
-            "run_at": "document_idle",
-            "js": ["content.js"],
-            "css": ["style.css"]
+            "matches": ["<all_urls>"],
+            "js": ["scripts/ignore.js"],
+            "run_at": "document_start",
+            "world": "ISOLATED"
+        },
+        {
+            "matches": ["<all_urls>"],
+            "js": ["scripts/main.js"],
+            "run_at": "document_start",
+            "world": "MAIN"
         }
     ],
-    "browser_action": {
-        "default_title": "Игнор спасет мир",
-        "default_icon": "./icons/icon_128.png",
-        "default_popup": "popup.html"
+    "icons": {
+        "16": "assets/icon16.png",
+        "32": "assets/icon32.png",
+        "48": "assets/icon48.png",
+        "128": "assets/icon128.png"
     }
 }
