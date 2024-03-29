@@ -28,6 +28,25 @@ window.addEventListener('message', ({ data }) => {
     });
   }
 
+  if (data.type === 'tundra_toolkit_update_ignore_list') {
+    chrome.storage.local.get('ignoreList').then(result => {
+      const ignoreList = result.ignoreList || {};
+      const boardList = ignoreList[data.boardID] || {};
+
+      const newData = {
+        ...ignoreList,
+        [data.boardID]: {
+          ...boardList,
+          [data.forumID]: data.data,
+        }
+      }
+
+      chrome.storage.local.set({
+        ignoreList: newData,
+      })
+
+    });
+  }
 });
 
 chrome.runtime.onMessage.addListener(request => {
