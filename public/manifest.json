@@ -12,6 +12,10 @@
     "default_popup": "index.html",
     "default_icon": "icon512.png"
   },
+  "background": {
+    "service_worker": "scripts/background.js"
+  },
+  "options_page": "options.html",
   "content_scripts": [
     {
       "matches": [

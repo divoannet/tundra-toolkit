@@ -2,12 +2,17 @@ const hvIgnoreList = {
   style: null,
   ignoreList: [],
   boardID: null,
+  boardName: null,
   forumID: null,
+  forumName: null,
   userID: null,
   init: async function (forumData, data) {
     this.boardID = forumData.boardID;
     this.forumID = forumData.forumID;
     this.userID = forumData.userID;
+    // @ts-ignore
+    this.forumName = window.FORUM.get('topic.forum_name');
+    this.getBoardName();
 
     this.ignoreList = data;
 
@@ -16,6 +21,12 @@ const hvIgnoreList = {
 
     this.generateStyle();
     this.hideQuotes();
+  },
+  getBoardName: async function () {
+    const fetchData = await fetch('/api.php?method=board.get&fields=title');
+    const { response: { title } } = await fetchData.json();
+
+    this.boardName = title;
   },
   generateStyle: function () {
     const defaultStyles = '#pun.ignoreDisabled .post { display: block !important; }\n' +
@@ -48,7 +59,9 @@ const hvIgnoreList = {
     window.postMessage({
       type: 'tundra_toolkit_update_ignore_list',
       boardID: this.boardID,
+      boardName: this.boardName,
       forumID: this.forumID,
+      forumName: this.forumName,
       data: this.ignoreList,
     });
   },
