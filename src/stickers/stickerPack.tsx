@@ -37,10 +37,8 @@ export function StickerPack({
   }
 
   const handleStickerClick = async (event) => {
-    // @ts-ignore
     chrome.tabs.query({currentWindow: true, active: true}, function (tabs){
       const activeTab = tabs[0];
-      // @ts-ignore
       chrome.tabs.sendMessage(activeTab.id, {
         type: 'tundra_toolkit_insert_sticker',
         src: event.target.src,

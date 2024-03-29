@@ -63,7 +63,6 @@ export function Stickers() {
 
   useEffect(() => {
     const fetchData = async () => {
-      // @ts-ignore
       const result = await chrome.storage.local.get('stickerPack');
 
       const stickerPack = result.stickerPack || {};
@@ -88,7 +87,6 @@ export function Stickers() {
     if (!loaded) return;
 
     const updateData = async () => {
-      // @ts-ignore
       await chrome.storage.local.set({ stickerPack: data });
     }
 
