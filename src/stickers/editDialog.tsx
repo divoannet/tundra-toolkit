@@ -16,7 +16,7 @@ export function EditDialog<Props>({
   const ref = useRef();
 
   const initialState: IStickerPack = {
-    id: '',
+    id: 0,
     name: '',
     items: [],
   }
@@ -53,21 +53,23 @@ export function EditDialog<Props>({
   }, [pack]);
 
   return (
-    <dialog ref={ref} onCancel={close}>
+    <dialog class="editPackDialog" ref={ref} onCancel={close}>
       <div>
         <input type="text" value={newData.name} onChange={handleNameChange} />
       </div>
       <div>
-        <textarea value={newData.items.join('\n')}  onChange={handleItemsChange} />
+        <textarea rows={4} value={newData.items.join('\n')}  onChange={handleItemsChange} />
       </div>
-      <div>
+      <div class="editPackDialogActions">
         <button
           onClick={close}
+          class="button"
         >
           Отмена
         </button>
         <button
           onClick={handleSave}
+          class="button"
         >
           Сохранить
         </button>

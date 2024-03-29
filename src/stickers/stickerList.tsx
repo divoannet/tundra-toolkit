@@ -14,8 +14,17 @@ export function StickerList({
 }: ListProps) {
   const [ activeTab, setActiveTab ] = useState<string>('');
 
+  const handleActiveTabChange = (newTab: string) => {
+    if (newTab === activeTab) {
+      setActiveTab('');
+    } else {
+      setActiveTab(newTab);
+    }
+  }
+
   useEffect(() => {
     const [ key ] = Object.keys(data);
+
     setActiveTab(key);
   }, []);
 
@@ -26,7 +35,7 @@ export function StickerList({
           key={ key }
           opened={ key === activeTab }
           pack={ pack }
-          onChange={ setActiveTab }
+          onChange={ handleActiveTabChange }
           removePack={removePack}
           editStickerPack={editStickerPack}
         />

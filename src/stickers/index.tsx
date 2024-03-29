@@ -9,6 +9,7 @@ export function Stickers() {
 
   const [ data, setData ] = useState<IStickersData>({});
 
+  const [ loaded, setLoaded ] = useState<boolean>(false);
   const [ loading, setLoading ] = useState<boolean>(true);
   const [ error, setError ] = useState<boolean>(false);
 
@@ -35,8 +36,6 @@ export function Stickers() {
   const removePack = (packId: string) => {
     const newData = { ...data };
     delete newData[ packId ];
-
-    console.log(packId, data);
 
     setData(newData);
   }
@@ -67,30 +66,15 @@ export function Stickers() {
       // @ts-ignore
       const result = await chrome.storage.local.get('stickerPack');
 
-      const mock = {
-        pack0: {
-          id: 0,
-          name: 'Pack 1',
-          items: [ 'https://i.imgur.com/vEDQLyy.png' ],
-        },
-        pack1: {
-          id: 1,
-          name: 'Pack 2',
-          items: [ 'https://i.imgur.com/vEDQLyy.png' ],
-        },
-        pack2: {
-          id: 2,
-          name: 'Pack 3',
-          items: [ 'https://i.imgur.com/vEDQLyy.png' ],
-        },
-      }
+      const stickerPack = result.stickerPack || {};
 
-      updateData(mock);
+      updateData(stickerPack);
     }
 
     fetchData()
       .then(() => {
         setError(false);
+        setLoaded(true);
       })
       .catch(reason => {
         setError(true);
@@ -99,6 +83,20 @@ export function Stickers() {
         setLoading(false);
       });
   }, [])
+
+  useEffect(() => {
+    if (!loaded) return;
+
+    const updateData = async () => {
+      // @ts-ignore
+      await chrome.storage.local.set({ stickerPack: data });
+    }
+
+    updateData().then(() => {
+      console.log('Storage updated');
+    })
+
+  }, [data]);
 
   if (loading) {
     return (

@@ -5,12 +5,17 @@
 
 	color: #333;
 	background-color: #fff;
+	--bgColor: #fff;
 
 	font-synthesis: none;
 	text-rendering: optimizeLegibility;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	-webkit-text-size-adjust: 100%;
+}
+
+* {
+	box-sizing: border-box;
 }
 
 body {
@@ -27,5 +32,6 @@ body {
 	:root {
 		color: #ccc;
 		background-color: #1a1a1a;
+		--bgColor: #1a1a1a;
 	}
 }
