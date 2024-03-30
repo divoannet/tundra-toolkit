@@ -3,9 +3,10 @@
 	line-height: 1.5;
 	font-weight: 400;
 
-	color: #333;
-	background-color: #fff;
-	--bgColor: #fff;
+	--bgColor: 255, 255, 255;
+	--textColor: 51, 51, 51;
+	background-color: rgb(var(--bgColor));
+	color: rgb(var(--textColor));
 
 	font-synthesis: none;
 	text-rendering: optimizeLegibility;
@@ -30,8 +31,9 @@ body {
 
 @media (prefers-color-scheme: dark) {
 	:root {
-		color: #ccc;
-		background-color: #1a1a1a;
-		--bgColor: #1a1a1a;
+		--bgColor: 26, 26, 26;
+		--textColor: 204, 204, 204;
+		color: rgb(var(--textColor));
+		background-color: rgb(var(--bgColor));
 	}
 }
