@@ -1,0 +1,39 @@
+:root {
+	font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+	line-height: 1.5;
+	font-weight: 400;
+
+	--bgColor: 255, 255, 255;
+	--textColor: 51, 51, 51;
+	background-color: rgb(var(--bgColor));
+	color: rgb(var(--textColor));
+
+	font-synthesis: none;
+	text-rendering: optimizeLegibility;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	-webkit-text-size-adjust: 100%;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+body {
+	margin: 0;
+}
+
+#app {
+	width: 400px;
+	height: 200px;
+	margin: 0 auto;
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--bgColor: 26, 26, 26;
+		--textColor: 204, 204, 204;
+		color: rgb(var(--textColor));
+		background-color: rgb(var(--bgColor));
+	}
+}

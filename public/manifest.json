@@ -1,0 +1,47 @@
+{
+  "manifest_version": 3,
+  "name": "Tundra Toolkit",
+  "description": "Набор инструментов для форумных ролевых игр на платформе MyBB и Rusff.",
+  "permissions": [
+    "activeTab",
+    "storage",
+    "contextMenus"
+  ],
+  "version": "2.0",
+  "action": {
+    "default_popup": "index.html",
+    "default_icon": "icon512.png"
+  },
+  "background": {
+    "service_worker": "scripts/background.js"
+  },
+  "options_page": "options.html",
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "scripts/main.js"
+      ],
+      "run_at": "document_end",
+      "world": "MAIN"
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "scripts/isolated.js"
+      ],
+      "run_at": "document_end",
+      "world": "ISOLATED"
+    }
+  ],
+  "icons": {
+    "16": "icon16.png",
+    "32": "icon32.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  }
+}
