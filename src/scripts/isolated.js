@@ -90,4 +90,10 @@ chrome.runtime.onMessage.addListener(request => {
       src: request.src,
     })
   }
+
+  if (request.type === 'tundra_toolkit_ignore_toggle') {
+    window.postMessage({
+      type: 'tundra_toolkit_ignore_toggle',
+    })
+  }
 });

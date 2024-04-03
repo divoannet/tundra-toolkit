@@ -157,4 +157,8 @@ window.addEventListener('message', ({ data }) => {
     hvIgnoreList.init(data.forumData, data.data);
   }
 
+  if (data.type === 'tundra_toolkit_ignore_toggle') {
+    document.querySelector('#pun')?.classList.toggle('ignoreDisabled');
+  }
+
 });
