@@ -17,10 +17,9 @@ window.addEventListener('message', ({ data }) => {
     });
 
     // init ignore script
-    chrome.storage.local.get('ignoreList').then(result => {
-      const ignoreList = result.ignoreList || {};
-      const boardList = ignoreList[boardID] || {};
-      const forumList = boardList[forumID] || [];
+    chrome.storage.local.get('ignoreList').then(({ ignoreList = [] }) => {
+      const boardList = ignoreList.find(item => item.boardID === boardID);
+      const forumList = boardList?.forums.find(item => item.forumID === forumID)?.users || [];
 
       window.postMessage({
         type: 'tundra_toolkit_init_ignore',
@@ -40,43 +39,53 @@ window.addEventListener('message', ({ data }) => {
       boardName,
       forumID,
       forumName,
-      data: forumData,
+      data: newUsers,
     } = data;
 
-    chrome.storage.local.get('ignoreList').then(result => {
-      const ignoreList = result.ignoreList || {};
-      const boardList = ignoreList[boardID] || {};
+    chrome.storage.local.get('ignoreList').then(({ ignoreList = [] }) => {
+      const boardIndex = ignoreList.findIndex(item => item.boardID === boardID);
 
-      const newData = {
-        ...ignoreList,
-        [boardID]: {
-          ...boardList,
-          [forumID]: forumData,
+      const newData = boardIndex >= 0 ? ignoreList.map(board => {
+        if (board.boardID !== boardID) return board;
+        const forumIndex = board.forums.findIndex(item => item.forumID === forumID);
+
+        const newForumData = forumIndex >= 0 ? board.forums.map(forum => {
+          if (forum.forumID !== forumID) return forum;
+
+          return {
+            ...forum,
+            users: newUsers,
+          }
+        }) : [
+          ...board.forums,
+          {
+            forumID: forumID,
+            forumName,
+            users: newUsers,
+          }
+        ]
+
+        return {
+          ...board,
+          forums: newForumData,
         }
-      }
+      }) : [
+        ...ignoreList,
+        {
+          boardID: boardID,
+          boardName,
+          forums: [
+            {
+              forumID: forumID,
+              forumName,
+              users: newUsers,
+            }
+          ],
+        }
+      ];
 
       chrome.storage.local.set({
         ignoreList: newData,
-      })
-
-    });
-
-    // update forums data
-    chrome.storage.local.get('boards').then(result => {
-      const boards = result.boards || {};
-      const newData = {
-        ...boards,
-        [boardID]: {
-          boardName,
-          forums: {
-            ...(boards[boardID]?.forums || {}),
-            [forumID]: forumName,
-          },
-        }
-      };
-
-      chrome.storage.local.set({
-        boards: newData,
       })
 
     });
