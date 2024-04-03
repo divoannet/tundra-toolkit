@@ -46,22 +46,22 @@ export function BlackListOptions() {
       setData(storedData);
     }
 
-    fetchData();
+    fetchData()
   }, []);
 
   return (
     <ul class="blackList">
-      { data.map(({ boardID, boardName, forums }) => (
+      { data.map(({ boardID, boardName, boardUrl, forums }) => (
         <li class="blackListBoardItem" key={ boardID }>
-          { boardName }
+          <a href={`https://${boardUrl}`} target="_blank">{ boardName }</a>
           <ul class="blackListForum">
             { forums.map(({ forumID, forumName, users }) => (
               <li class="blackListForumItem" key={ forumID }>
-                { forumName }
+                <a href={`https://${boardUrl}/viewforum.php?id=${forumID}`} target="_blank">{ forumName }</a>
                 <ul class="blackListUsers">
                   { users.map(user => (
                     <li class="blackListUserItem" key={ user.userID }>
-                      { user.userName }
+                      <a href={`https://${boardUrl}/profile.php?id=${user.userID}`} target="_blank">{ user.userName }</a>
                       <span
                         class="blackListRemoveItem"
                         onClick={() => handleRemoveClick(boardID, forumID, user)}>x</span>

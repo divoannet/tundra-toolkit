@@ -1,6 +1,7 @@
 interface IBoardStore {
   boardID: string;
   boardName: string;
+  boardUrl: string;
   forums: IForumStore[];
 }
 

@@ -37,6 +37,7 @@ window.addEventListener('message', ({ data }) => {
     const {
       boardID,
       boardName,
+      boardUrl,
       forumID,
       forumName,
       data: newUsers,
@@ -59,7 +60,7 @@ window.addEventListener('message', ({ data }) => {
         }) : [
           ...board.forums,
           {
-            forumID: forumID,
+            forumID,
             forumName,
             users: newUsers,
           }
@@ -72,11 +73,12 @@ window.addEventListener('message', ({ data }) => {
       }) : [
         ...ignoreList,
         {
-          boardID: boardID,
+          boardID,
           boardName,
+          boardUrl,
           forums: [
             {
-              forumID: forumID,
+              forumID,
               forumName,
               users: newUsers,
             }

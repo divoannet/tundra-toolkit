@@ -3,6 +3,7 @@ const hvIgnoreList = {
   ignoreList: [],
   boardID: null,
   boardName: null,
+  boardUrl: null,
   forumID: null,
   forumName: null,
   userID: null,
@@ -12,6 +13,7 @@ const hvIgnoreList = {
     this.userID = forumData.userID;
     // @ts-ignore
     this.forumName = window.FORUM.get('topic.forum_name');
+    this.boardUrl = window.location.host;
     this.getBoardName();
 
     this.ignoreList = data;
@@ -64,6 +66,7 @@ const hvIgnoreList = {
       type: 'tundra_toolkit_update_ignore_list',
       boardID: this.boardID,
       boardName: this.boardName,
+      boardUrl: this.boardUrl,
       forumID: this.forumID,
       forumName: this.forumName,
       data: this.ignoreList,
