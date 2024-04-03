@@ -52,6 +52,10 @@ const hvIgnoreList = {
     });
   },
   addUser: function ({ userID, userName }) {
+    const isConfirmed = confirm(`Игнорировать посты ${userName} в разделе [ ${this.forumName} ]?`);
+
+    if (!isConfirmed) return;
+
     this.ignoreList.push({ userID, userName });
     this.generateStyle();
     this.hideQuotes();
@@ -97,10 +101,12 @@ function main() {
     if (!postUserId || +postUserId === userID) return;
 
     const postLinks = post.querySelector('.post-links > ul');
+    const plEmail = postLinks.querySelectorAll('.pl-email');
+    const last = [ ...plEmail ].pop();
 
-    postLinks.insertAdjacentHTML(
-      'beforeend',
-      `<li class="pl-ignore"><a href="#" data-link="ignoreLink" data-user-id="${postUserId}">Игнорировать</a></li>`);
+    last.insertAdjacentHTML(
+      'afterend',
+      `<li class="pl-email ignore"><a href="#" data-link="ignoreLink" data-user-id="${postUserId}">Игнорировать</a></li>`);
     postLinks.addEventListener('click', addUserToIgnoreList);
   }
 
