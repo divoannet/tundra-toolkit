@@ -2,13 +2,35 @@
     display: flex;
     flex-wrap: wrap;
     gap: 12px;
+    padding: 16px 12px;
 
     --bg-add-item: #00000044;
+}
+
+.stickerListContent.edited {
+    padding: 16px 12px;
+}
+
+.stickerListHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 64px;
+    background: #8ba2a633;
+    padding: 0 12px;
+}
+
+.stickerListHeader h4 {
+    margin: 0;
 }
 
 .stickerItem {
     max-height: 100px;
     position: relative;
+    cursor: grab;
+}
+.stickerItem:active {
+    cursor: grabbing;
 }
 .stickerItem.moving {
     opacity: .5;

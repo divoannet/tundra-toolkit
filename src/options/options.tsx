@@ -14,14 +14,15 @@ export function App() {
 					<div className="logo">
 						<img src='./icon512.png' />
 					</div>
-					<h1>Tundra Toolkit</h1>
-					<div>Набор инструментов от <a href="https://t.me/hvscripts" target="_blank">Человека-Шамана</a></div>
+					<h1>Tundra Toolkit <span>v2.1-alpha</span></h1>
+					<div>Набор инструментов от <a href="https://t.me/hvscripts" target="_blank">Человека-Шамана</a>.</div>
 				</div>
 			</header>
 			<main>
 				<h3>Чёрный список</h3>
 				<BlackListOptions />
 				<h3>Стикеры</h3>
+				<h6>Можно перетаскивать стикеры для сортировки</h6>
 				<StickerPackOptions />
 			</main>
 		</div>

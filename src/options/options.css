@@ -1,5 +1,5 @@
 :root {
-    --bg-color: #fff;
+    --bg-color: #e8eced;
     --color-primary: #0C2028;
     --width: 860px;
 }
@@ -32,6 +32,11 @@ header h1 {
 
 header a {
     color: #0C2028;
+}
+
+header h1 span {
+    opacity: .7;
+    font-size: 1rem;
 }
 
 .main {
