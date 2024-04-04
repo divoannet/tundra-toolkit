@@ -1,9 +1,3 @@
-:root {
-    --bg-color: #e8eced;
-    --color-primary: #0C2028;
-    --width: 860px;
-}
-
 body {
     margin: 0;
 }
@@ -49,16 +43,4 @@ main {
     max-width: var(--width);
     margin: auto;
     padding: 24px;
-}
-
-.button.small {
-    padding: .3em;
-}
-
-@media (prefers-color-scheme: dark) {
-    :root {
-        --font-color: #c0cad4;
-        --bg-color: #22272b;
-        --color-primary: #8BA2A6;
-    }
 }

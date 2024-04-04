@@ -35,18 +35,10 @@
 .blackList .blackListUserItem {
     padding: 4px 16px 4px 48px;
     position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 .blackList .blackListUserItem:hover {
     background: #8BA2A611;
-}
-
-.blackListRemoveItem {
-    cursor: pointer;
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    font-family: "Courier New", sans-serif;
-    padding: 2px;
-    border: solid 1px;
-    float: right;
 }

@@ -69,9 +69,10 @@ export function BlackListOptions() {
                          target="_blank">{ user.userName }</a>
                       <button
                         className="button small icon-only blackListRemoveItem"
+                        title="Амнистировать пользователя"
                         onClick={ () => handleRemoveClick(boardID, forumID, user) }
                       >
-                        x
+                        X
                       </button>
                     </li>
                   )) }

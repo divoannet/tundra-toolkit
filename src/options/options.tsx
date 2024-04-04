@@ -4,6 +4,7 @@ import { BlackListOptions } from './blackListOptions';
 import StickerPackOptions from './stickerPackOptions';
 
 import '../chota.min.css';
+import '../common.css';
 import './options.css';
 
 export function App() {

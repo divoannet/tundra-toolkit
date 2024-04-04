@@ -106,9 +106,9 @@ export default function ({ pack, onChange }: Props) {
           <h4>{ name }</h4>
         ) }
         <div className="actions">
-          { !edit && <button className="button small" onClick={ showEditPack }>🖋️</button> }
-          { edit && <button className="button success small" onClick={ savePack }>✔️️</button> }
-          { edit && <button className="button small" onClick={ hideEditPack }>❌️</button> }
+          { !edit && <button className="button small" onClick={ showEditPack } title="Редактировать стикерпак">🖋️</button> }
+          { edit && <button className="button success small" onClick={ savePack } title="Сохранить изменения">✔️️</button> }
+          { edit && <button className="button small" onClick={ hideEditPack } title="Отменить изменения">X</button> }
         </div>
       </div>
       { edit ? (
