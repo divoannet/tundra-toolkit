@@ -31,6 +31,12 @@ window.addEventListener('message', ({ data }) => {
         data: forumList,
       })
     });
+
+    if (forumID) {
+      chrome.runtime.sendMessage({
+        type: 'tundra_toolkit_init_data',
+      })
+    }
   }
 
   if (data.type === 'tundra_toolkit_update_ignore_list') {

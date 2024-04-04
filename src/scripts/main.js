@@ -104,6 +104,9 @@ function main() {
     if (!postUserId || +postUserId === userID || postUserId === '1') return;
 
     const postLinks = post.querySelector('.post-links > ul');
+
+    if (!postLinks) return;
+
     const plEmail = postLinks.querySelectorAll('.pl-email');
     const last = [ ...plEmail ].pop();
 
