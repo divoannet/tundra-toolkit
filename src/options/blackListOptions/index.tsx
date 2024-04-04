@@ -7,7 +7,7 @@ export function BlackListOptions() {
   const [ data, setData ] = useState<IBoardStore[]>([]);
 
   const handleRemoveClick = (boardID: string, forumID: string, user: { userName: string, userID: string }) => {
-    const isConfirmed = confirm(`Разбанить ${user.userName}?`);
+    const isConfirmed = confirm(`Разбанить ${ user.userName }?`);
 
     if (!isConfirmed) return;
 
@@ -52,26 +52,34 @@ export function BlackListOptions() {
   return (
     <ul class="blackList">
       { data.map(({ boardID, boardName, boardUrl, forums }) => (
-        <li class="blackListBoardItem" key={ boardID }>
-          <a href={`https://${boardUrl}`} target="_blank">{ boardName }</a>
+        <>
+          <li class="blackListBoardItem" key={ boardID }>
+            <a href={ `https://${ boardUrl }` } target="_blank">{ boardName }</a>
+          </li>
           <ul class="blackListForum">
             { forums.map(({ forumID, forumName, users }) => (
-              <li class="blackListForumItem" key={ forumID }>
-                <a href={`https://${boardUrl}/viewforum.php?id=${forumID}`} target="_blank">{ forumName }</a>
+              <>
+                <li className="blackListForumItem" key={ forumID }>
+                  <a href={ `https://${ boardUrl }/viewforum.php?id=${ forumID }` } target="_blank">{ forumName }</a>
+                </li>
                 <ul class="blackListUsers">
                   { users.map(user => (
-                    <li class="blackListUserItem" key={ user.userID }>
-                      <a href={`https://${boardUrl}/profile.php?id=${user.userID}`} target="_blank">{ user.userName }</a>
-                      <span
-                        class="blackListRemoveItem"
-                        onClick={() => handleRemoveClick(boardID, forumID, user)}>x</span>
+                    <li className="blackListUserItem" key={ user.userID }>
+                      <a href={ `https://${ boardUrl }/profile.php?id=${ user.userID }` }
+                         target="_blank">{ user.userName }</a>
+                      <button
+                        className="button small icon-only blackListRemoveItem"
+                        onClick={ () => handleRemoveClick(boardID, forumID, user) }
+                      >
+                        x
+                      </button>
                     </li>
                   )) }
                 </ul>
-              </li>
+              </>
             )) }
           </ul>
-        </li>
+        </>
       )) }
     </ul>
   )

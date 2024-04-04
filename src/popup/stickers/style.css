@@ -41,7 +41,7 @@ button:hover {
 .stickerList_emptyIcon {
     width: 64px;
     height: 64px;
-    background: url('../../public/icon128.png');
+    background: url('../../../public/icon128.png');
     background-size: contain;
     opacity: .3;
     cursor: pointer;

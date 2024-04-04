@@ -1,0 +1,13 @@
+.stickerListContent {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.stickerItem {
+    max-height: 100px;
+}
+.stickerItem img {
+    max-height: 100px;
+    max-width: 100px;
+}

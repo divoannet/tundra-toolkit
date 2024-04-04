@@ -2,7 +2,6 @@
     margin: 0;
     list-style: none;
     padding: 0;
-    width: 600px;
 }
 
 .blackList ul {
@@ -17,15 +16,28 @@
 .blackListBoardItem {
     border: solid 1px;
     border-width: 1px 0 0;
+    background: #8BA2A633;
 }
 
-.blackListUserItem {
-    padding: 4px 16px;
+.blackList .blackListForum {
+    margin: 0 0 16px;
+}
+
+.blackList .blackListForumItem {
+    padding: 4px 16px 4px 32px;
+    background: #8BA2A611;
+}
+
+.blackList .blackListUsers {
+    margin: 0 0 8px;
+}
+
+.blackList .blackListUserItem {
+    padding: 4px 16px 4px 48px;
     position: relative;
 }
-
-.blackListUserItem:hover {
-    background: rgb(var(--textColor) / .2);
+.blackList .blackListUserItem:hover {
+    background: #8BA2A611;
 }
 
 .blackListRemoveItem {
