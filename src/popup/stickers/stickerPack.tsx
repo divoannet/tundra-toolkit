@@ -1,7 +1,4 @@
-import {createContext} from "preact";
 import {useEffect, useState} from "react";
-
-const StickerData = createContext([]);
 
 type PackProps = {
   pack: IStickerPack;
@@ -15,7 +12,6 @@ export function StickerPack({
   pack,
   onChange,
   opened,
-  removePack,
   editStickerPack,
 }: PackProps) {
 
@@ -25,14 +21,8 @@ export function StickerPack({
     onChange(`pack${pack.id}`)
   }
 
-  const handleRemovePack = () => {
-    const isConfirmed = confirm(`Удалить стикерпак "${pack.name}"? Это необратимо.`);
-    if (!isConfirmed) return;
-
-    removePack(`pack${pack.id}`);
-  }
-
-  const handleEditPack = () => {
+  const handleEditPack = event => {
+    event.stopPropagation();
     editStickerPack(`pack${pack.id}`);
   }
 
@@ -59,12 +49,12 @@ export function StickerPack({
           <div
             className="stickerPackTitleIcon"
             style={`--bg-image: url(${titleImg});`}
+            onClick={handleTitleClick}
           ></div>
         )}
         <h4 class="stickerPackTitle" onClick={handleTitleClick}>{pack.name}</h4>
         <div className="stickerPackTitleActions">
-          <button className="button" onClick={handleEditPack}>🖋️</button>
-          <button className="button" onClick={handleRemovePack}>X</button>
+          <button className="button small" onClick={handleEditPack}>🖋️</button>
         </div>
       </div>
       {opened && (

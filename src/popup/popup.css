@@ -1,17 +1,9 @@
-:root {
-	--bg-color: #fff;
-	--color-primary: #0C2028;
-}
-
 #app {
 	width: 400px;
 	height: 200px;
 	margin: 0 auto;
 }
 
-@media (prefers-color-scheme: dark) {
-	:root {
-		--bg-color: #1a1a1a;
-		--color-primary: #8BA2A6;
-	}
+h4 {
+	margin: 0;
 }

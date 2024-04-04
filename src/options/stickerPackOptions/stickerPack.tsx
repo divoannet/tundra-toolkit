@@ -7,9 +7,10 @@ import './style.css';
 type Props = {
   pack: IStickerPack;
   onChange: (pack: IStickerPack) => void;
+  onRemove: (packId: string) => void;
 }
 
-export default function ({ pack, onChange }: Props) {
+export default function ({ pack, onChange, onRemove }: Props) {
   const dragItem = useRef();
   const dragOverItem = useRef();
 
@@ -42,6 +43,14 @@ export default function ({ pack, onChange }: Props) {
       items: clearedItems,
     });
     setEdit(false);
+  }
+
+  const hideRemovePack = () => {
+    const isConfirmed = confirm('Удалить стикерпак? Это необратимо.')
+
+    if (!isConfirmed) return;
+
+    onRemove(`pack${pack.id}`);
   }
 
   const handleDragStart = event => {
@@ -107,8 +116,9 @@ export default function ({ pack, onChange }: Props) {
         ) }
         <div className="actions">
           { !edit && <button className="button small" onClick={ showEditPack } title="Редактировать стикерпак">🖋️</button> }
-          { edit && <button className="button success small" onClick={ savePack } title="Сохранить изменения">✔️️</button> }
-          { edit && <button className="button small" onClick={ hideEditPack } title="Отменить изменения">X</button> }
+          { edit && <button className="button success small" onClick={ savePack } title="Сохранить изменения">Сохранить</button> }
+          { edit && <button className="button small" onClick={ hideEditPack } title="Отменить изменения">Отменить</button> }
+          { edit && <button className="button clear small" onClick={ hideRemovePack } title="Удалить стикерпак">Удалить</button> }
         </div>
       </div>
       { edit ? (

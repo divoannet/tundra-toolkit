@@ -50,38 +50,41 @@ export function BlackListOptions() {
   }, []);
 
   return (
-    <ul class="blackList">
-      { data.map(({ boardID, boardName, boardUrl, forums }) => (
-        <>
-          <li class="blackListBoardItem" key={ boardID }>
-            <a href={ `https://${ boardUrl }` } target="_blank">{ boardName }</a>
-          </li>
-          <ul class="blackListForum">
-            { forums.map(({ forumID, forumName, users }) => (
-              <>
-                <li className="blackListForumItem" key={ forumID }>
-                  <a href={ `https://${ boardUrl }/viewforum.php?id=${ forumID }` } target="_blank">{ forumName }</a>
-                </li>
-                <ul class="blackListUsers">
-                  { users.map(user => (
-                    <li className="blackListUserItem" key={ user.userID }>
-                      <a href={ `https://${ boardUrl }/profile.php?id=${ user.userID }` }
-                         target="_blank">{ user.userName }</a>
-                      <button
-                        className="button small icon-only blackListRemoveItem"
-                        title="Амнистировать пользователя"
-                        onClick={ () => handleRemoveClick(boardID, forumID, user) }
-                      >
-                        X
-                      </button>
-                    </li>
-                  )) }
-                </ul>
-              </>
-            )) }
-          </ul>
-        </>
-      )) }
-    </ul>
+    <section>
+      <h3>Чёрный список</h3>
+      <ul class="blackList">
+        { data.map(({ boardID, boardName, boardUrl, forums }) => (
+          <>
+            <li class="blackListBoardItem" key={ boardID }>
+              <a href={ `https://${ boardUrl }` } target="_blank">{ boardName }</a>
+            </li>
+            <ul class="blackListForum">
+              { forums.map(({ forumID, forumName, users }) => (
+                <>
+                  <li className="blackListForumItem" key={ forumID }>
+                    <a href={ `https://${ boardUrl }/viewforum.php?id=${ forumID }` } target="_blank">{ forumName }</a>
+                  </li>
+                  <ul class="blackListUsers">
+                    { users.map(user => (
+                      <li className="blackListUserItem" key={ user.userID }>
+                        <a href={ `https://${ boardUrl }/profile.php?id=${ user.userID }` }
+                           target="_blank">{ user.userName }</a>
+                        <button
+                          className="button small icon-only blackListRemoveItem"
+                          title="Амнистировать пользователя"
+                          onClick={ () => handleRemoveClick(boardID, forumID, user) }
+                        >
+                          X
+                        </button>
+                      </li>
+                    )) }
+                  </ul>
+                </>
+              )) }
+            </ul>
+          </>
+        )) }
+      </ul>
+    </section>
   )
 }

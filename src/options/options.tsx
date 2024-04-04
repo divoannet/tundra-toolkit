@@ -20,10 +20,7 @@ export function App() {
 				</div>
 			</header>
 			<main>
-				<h3>Чёрный список</h3>
 				<BlackListOptions />
-				<h3>Стикеры</h3>
-				<h6>Можно перетаскивать стикеры для сортировки</h6>
 				<StickerPackOptions />
 			</main>
 		</div>

@@ -13,7 +13,8 @@ export function Stickers() {
   const [ loading, setLoading ] = useState<boolean>(true);
   const [ error, setError ] = useState<boolean>(false);
 
-  const [editPack, setEditPack] = useState<IStickerPack | null>(null);
+  const [ open, setOpen ] = useState<boolean>(false);
+  const [ editPack, setEditPack ] = useState<IStickerPack | null>(null);
 
   const updateData = (newData: IStickersData) => {
     setData(newData);
@@ -25,7 +26,7 @@ export function Stickers() {
 
     setData({
       ...data,
-      [ `pack${ newIndex}` ]: {
+      [ `pack${ newIndex }` ]: {
         id: newIndex,
         name: `New Pack ${ newIndex + 1 }`,
         items: [],
@@ -49,7 +50,7 @@ export function Stickers() {
   }
 
   const onEditPack = (packId: string) => {
-    const pack: IStickerPack = data[packId] || null;
+    const pack: IStickerPack = data[ packId ] || null;
     setEditPack(pack);
   }
 
@@ -57,9 +58,13 @@ export function Stickers() {
     const isNotUniq = Object.values(data).some(item => item.name === newData.name && item.id !== newData.id);
     if (isNotUniq) return;
 
-    updateStickerPack(`pack${newData.id}`, newData);
+    updateStickerPack(`pack${ newData.id }`, newData);
     setEditPack(null);
   }
+
+  useEffect(() => {
+    setOpen(!!editPack);
+  }, [editPack]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -94,7 +99,7 @@ export function Stickers() {
       console.log('Storage updated');
     })
 
-  }, [data]);
+  }, [ data ]);
 
   if (loading) {
     return (
@@ -131,14 +136,14 @@ export function Stickers() {
           </div>
         ) }
       <div class="stickerListActions">
-        <button class="button" onClick={ addPack }>Добавить стикерпак</button>
+        <button class="button small" onClick={ addPack }>Добавить стикерпак</button>
       </div>
 
       <EditDialog
-        pack={editPack}
-        open={!!editPack}
-        close={() => setEditPack(null)}
-        onSave={handleSavePack}
+        pack={ editPack }
+        close={ () => setEditPack(null) }
+        onSave={ handleSavePack }
+        onRemove={ removePack }
       />
     </div>
   )
