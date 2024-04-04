@@ -2,12 +2,44 @@
     display: flex;
     flex-wrap: wrap;
     gap: 12px;
+
+    --bg-add-item: #00000044;
 }
 
 .stickerItem {
     max-height: 100px;
+    position: relative;
+}
+.stickerItem.moving {
+    opacity: .5;
+}
+.stickerItem.hoveredLeft:before {
+    content: '';
+    display: block;
+    background: var(--bg-add-item);
+    position: absolute;
+    top: 0;
+    left: -4px;
+    height: 100%;
+    width: 4px;
+}
+.stickerItem.hoveredRight:before {
+    content: '';
+    display: block;
+    background: var(--bg-add-item);
+    position: absolute;
+    top: 0;
+    right: -4px;
+    height: 100%;
+    width: 4px;
 }
 .stickerItem img {
     max-height: 100px;
     max-width: 100px;
+}
+
+@media (prefers-color-scheme: dark) {
+    .stickerListContent {
+        --bg-add-item: #ffffff44;
+    }
 }

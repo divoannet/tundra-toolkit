@@ -101,7 +101,7 @@ function main() {
   const addIgnoreLink = post => {
     const postUserId = post.dataset.userId;
 
-    if (!postUserId || +postUserId === userID) return;
+    if (!postUserId || +postUserId === userID || postUserId === '1') return;
 
     const postLinks = post.querySelector('.post-links > ul');
     const plEmail = postLinks.querySelectorAll('.pl-email');
