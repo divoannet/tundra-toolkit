@@ -41,7 +41,7 @@ export function BlackListOptions() {
 
     const fetchData = async () => {
       const storage = await chrome.storage.local.get([ 'ignoreList' ]);
-      const storedData = storage[ 'ignoreList' ] || {};
+      const storedData = storage[ 'ignoreList' ] || [];
 
       setData(storedData);
     }
@@ -85,6 +85,12 @@ export function BlackListOptions() {
           </>
         )) }
       </ul>
+
+      {!data.length && (
+        <div className="emptyList">
+          Список пока пуст. Кнопка "Игнорировать" появится в постах пользователей на форуме.
+        </div>
+      )}
     </section>
   )
 }

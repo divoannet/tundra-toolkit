@@ -7,7 +7,7 @@ import './style.css';
 type Props = {
   pack: IStickerPack;
   onChange: (pack: IStickerPack) => void;
-  onRemove: (packId: string) => void;
+  onRemove: (packId: number) => void;
 }
 
 export default function ({ pack, onChange, onRemove }: Props) {
@@ -50,7 +50,7 @@ export default function ({ pack, onChange, onRemove }: Props) {
 
     if (!isConfirmed) return;
 
-    onRemove(`pack${pack.id}`);
+    onRemove(pack.id);
   }
 
   const handleDragStart = event => {

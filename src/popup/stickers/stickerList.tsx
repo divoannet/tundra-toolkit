@@ -2,41 +2,38 @@ import { StickerPack } from './stickerPack';
 import { useEffect, useState } from "react";
 
 type ListProps = {
-  data: IStickersData;
-  removePack: (packId: string) => void;
-  editStickerPack: (packId: string) => void;
+  data: IStickerPack[];
+  editStickerPack: (packId: number) => void;
 }
 
 export function StickerList({
   data,
-  removePack,
   editStickerPack,
 }: ListProps) {
-  const [ activeTab, setActiveTab ] = useState<string>('');
+  const [ activeTab, setActiveTab ] = useState<number | null>(0);
 
-  const handleActiveTabChange = (newTab: string) => {
+  const handleActiveTabChange = (newTab: number) => {
     if (newTab === activeTab) {
-      setActiveTab('');
+      setActiveTab(null);
     } else {
       setActiveTab(newTab);
     }
   }
 
   useEffect(() => {
-    const [ key ] = Object.keys(data);
+    const [ { id: packId = 0 } ] = data;
 
-    setActiveTab(key);
+    setActiveTab(packId);
   }, []);
 
   return (
     <div>
-      { Object.entries(data).map(([ key, pack ]) => (
+      { data.map(pack => (
         <StickerPack
-          key={ key }
-          opened={ key === activeTab }
+          key={ pack.id }
+          opened={ pack.id === activeTab }
           pack={ pack }
           onChange={ handleActiveTabChange }
-          removePack={removePack}
           editStickerPack={editStickerPack}
         />
       )) }

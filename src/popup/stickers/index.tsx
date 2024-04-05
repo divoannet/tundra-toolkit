@@ -7,70 +7,63 @@ import './style.css';
 
 export function Stickers() {
 
-  const [ data, setData ] = useState<IStickersData>({});
+  const [ data, setData ] = useState<IStickerPack[]>([]);
 
   const [ loaded, setLoaded ] = useState<boolean>(false);
   const [ loading, setLoading ] = useState<boolean>(true);
   const [ error, setError ] = useState<boolean>(false);
 
-  const [ open, setOpen ] = useState<boolean>(false);
   const [ editPack, setEditPack ] = useState<IStickerPack | null>(null);
 
-  const updateData = (newData: IStickersData) => {
+  const updateData = (newData: IStickerPack[]) => {
     setData(newData);
   }
 
   const addPack = () => {
-    const indexes = Object.values(data).map(item => item.id);
-    const newIndex = indexes.length ? Math.max(...indexes) + 1 : 0;
+    const indexes = data.map(item => item.id);
+    const newIndex = data.length ? Math.max(...indexes) + 1 : 0;
 
-    setData({
-      ...data,
-      [ `pack${ newIndex }` ]: {
-        id: newIndex,
-        name: `New Pack ${ newIndex + 1 }`,
-        items: [],
-      }
-    });
-  }
+    const newData = [ ...data, {
+      id: newIndex,
+      name: `New Pack ${ newIndex + 1 }`,
+      items: [],
+    } ]
 
-  const removePack = (packId: string) => {
-    const newData = { ...data };
-    delete newData[ packId ];
+    console.log('newData', newData);
 
     setData(newData);
   }
 
-  const updateStickerPack = (packId: string, { name, items }: { name?: string, items?: string[] }) => {
-    const newData = { ...data };
-    newData[ packId ].name = name || newData[ packId ].name;
-    newData[ packId ].items = items || newData[ packId ].items;
-
+  const removePack = (packId: number) => {
+    const newData = [ ...data ];
+    const index = newData.findIndex(item => item.id === packId);
+    newData.splice(index, 1);
     setData(newData);
   }
 
-  const onEditPack = (packId: string) => {
-    const pack: IStickerPack = data[ packId ] || null;
+  const updateStickerPack = (packId: number, { name, items }: { name?: string, items?: string[] }) => {
+    const newData = [ ...data ];
+    const index = newData.findIndex(item => item.id === packId);
+    newData[ index ].name = name || newData[ index ].name;
+    newData[ index ].items = items || newData[ index ].items;
+    setData(newData);
+  }
+
+  const onEditPack = (packId: number) => {
+    const pack = data.find(item => item.id === packId);
     setEditPack(pack);
   }
 
   const handleSavePack = (newData: IStickerPack) => {
-    const isNotUniq = Object.values(data).some(item => item.name === newData.name && item.id !== newData.id);
-    if (isNotUniq) return;
-
-    updateStickerPack(`pack${ newData.id }`, newData);
+    updateStickerPack(newData.id, newData);
     setEditPack(null);
   }
-
-  useEffect(() => {
-    setOpen(!!editPack);
-  }, [editPack]);
 
   useEffect(() => {
     const fetchData = async () => {
       const result = await chrome.storage.local.get('stickerPack');
 
-      const stickerPack = result.stickerPack || {};
+      const stickerPack = result.stickerPack || [];
 
       updateData(stickerPack);
     }
@@ -119,12 +112,11 @@ export function Stickers() {
 
   return (
     <div class="stickerListWrapper">
-      { Object.keys(data).length
+      { data.length
         ? (
           <div class="stickerList">
             <StickerList
               data={ data }
-              removePack={ removePack }
               editStickerPack={ onEditPack }
             />
           </div>

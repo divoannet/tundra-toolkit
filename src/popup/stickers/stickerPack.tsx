@@ -3,9 +3,8 @@ import {useEffect, useState} from "react";
 type PackProps = {
   pack: IStickerPack;
   opened: boolean;
-  onChange: (newActiveTab: string) => void;
-  removePack: (packId: string) => void;
-  editStickerPack: (packId: string) => void;
+  onChange: (newActiveTab: number) => void;
+  editStickerPack: (packId: number) => void;
 }
 
 export function StickerPack({
@@ -18,12 +17,12 @@ export function StickerPack({
   const [titleImg, setTitleImg] = useState<string>('');
 
   const handleTitleClick = () => {
-    onChange(`pack${pack.id}`)
+    onChange(pack.id)
   }
 
   const handleEditPack = event => {
     event.stopPropagation();
-    editStickerPack(`pack${pack.id}`);
+    editStickerPack(pack.id);
   }
 
   const handleStickerClick = async (event) => {

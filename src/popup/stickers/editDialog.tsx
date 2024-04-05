@@ -46,12 +46,11 @@ export function EditDialog<Props>({
 
     if (!isConfirmed) return;
 
-    onRemove(`pack${pack.id}`);
+    onRemove(pack.id);
     close();
   }
 
   useEffect(() => {
-    console.log('pack', !!pack);
     if (!!pack) {
       // @ts-ignore
       ref.current?.showModal();
